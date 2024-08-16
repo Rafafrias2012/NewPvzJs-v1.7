@@ -391,6 +391,20 @@ oS = {
             },
             [NewEle("DivParty", "div", "line-height:50px;color:#FFFFFF;font-size:50px;font-family:方正少儿简体", {},
             EDAll)]) : (SetVisible($("dMenu")), AutoSelectCard(), LetsGO())
+	    NewEle("speedSlider", "div", "position:absolute;right:10px;top:545px;", {}, EDAll);
+    var sliderHTML = '<input type="range" id="speedControl" min="1" max="4" step="0.1" value="1">' +
+                     '<label for="speedControl">Speed: ×<span id="speedValue">1.0</span></label>';
+    $("speedSlider").innerHTML = sliderHTML;
+
+    var speedControl = $("speedControl");
+    var speedValue = $("speedValue");
+
+    speedControl.oninput = function() {
+        var speed = parseFloat(this.value).toFixed(1);
+        speedValue.innerHTML = speed;
+        oSym.NowStep = 10 / speed;
+        oSym.TimeStep = 10 / speed;
+           };
         };
         f.LoadAccess ? f.LoadAccess(d) : d()
     },
